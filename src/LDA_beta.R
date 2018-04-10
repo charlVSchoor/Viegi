@@ -1,3 +1,27 @@
+
+
+# Next -0 sum all the gammas for each document - get the distributions of each
+# --------------------------------------------------------------------------------------------------- #
+# TO DO:
+  ## make this thing OOP
+  ## conduct sentiment analysis - also go to other text mining methods
+  ## test the betas in a linear regression (dep variable - sentiment analysis pos/neg 
+    ### or use pos/neg value from bank for increase or decrease in the repo rate)
+# --------------------------------------------------------------------------------------------------- #
+
+
+# --------------------------------------------------------------------------------------------------- #
+# NOW:
+  ## OOP:
+    ### break down the objectives
+    ### create objects for each step of the objectives
+      #### Objectives: Processing, Training, Score(give the outputs ralative value),
+      #### Evaluate(Visualization over Documents)
+# --------------------------------------------------------------------------------------------------- #
+
+
+
+
 library(tictoc)
 library(tidyverse)
 library(tidytext)
@@ -29,8 +53,7 @@ mpc_extract_clean <- mpc_extract %>%
   mutate(nr = 1:length(bank),
          bank = as.factor(bank),
          month = as.integer(month),
-         mpc_communication = as.character(mpc_communication),
-         date = dmy(date)) %>%
+         mpc_communication = as.character(mpc_communication)) %>%
   select(nr, everything()) 
 print(mpc_extract_clean)
 
@@ -159,11 +182,10 @@ mpc_top_documents %>%
   theme(axis.text.y = element_blank()) 
 
 
-# Next -0 sum all the gammas for each document - get the distributions of each
 
 
 
 
-
-
+mpc_topics_gamma  %>% as.data.frame() %>%  arrange(as.integer(document)) %>% head(30)
+mpc_topics_gamma  %>% as.data.frame() %>% mutate(gamma = reorder(gamma, document))  %>% head(30)
 
